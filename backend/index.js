@@ -12,8 +12,11 @@ app.use(cors({
 app.use(express.json());
 
 // Routes
-app.use('/api', require('./routes/auth'));
-app.use('/api', require('./routes/expense'));
+// app.use('/api', require('./routes/auth'));
+// app.use('/api', require('./routes/expense'));
+// Change this line in backend/index.js
+app.use('/api/auth', require('./routes/auth')); 
+app.use('/api/expenses', require('./routes/expense'));
 
 // Health check
 app.get('/', (req, res) => {
