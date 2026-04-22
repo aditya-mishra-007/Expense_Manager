@@ -3,8 +3,9 @@ const router = express.Router();
 const auth = require('../middleware/auth');
 const Expense = require('../models/Expense');
 
-// POST /api/expense — Add new expense (Protected)
-router.post('/expense', auth, async (req, res) => {
+// POST /api/expense (Add new)
+// Change from '/expense' to '/'
+router.post('/', auth, async (req, res) => {
   const { title, amount, category, date } = req.body;
 
   try {
@@ -24,8 +25,9 @@ router.post('/expense', auth, async (req, res) => {
   }
 });
 
-// GET /api/expenses — Get all expenses of logged-in user (Protected)
-router.get('/expenses', auth, async (req, res) => {
+// GET /api/expense (Get all)
+// Change from '/expenses' to '/'
+router.get('/', auth, async (req, res) => {
   try {
     const expenses = await Expense.find({ user: req.user.id }).sort({ date: -1 });
     res.json(expenses);
@@ -35,8 +37,9 @@ router.get('/expenses', auth, async (req, res) => {
   }
 });
 
-// DELETE /api/expense/:id — Delete an expense (Protected)
-router.delete('/expense/:id', auth, async (req, res) => {
+// DELETE /api/expense/:id
+// Change from '/expense/:id' to '/:id'
+router.delete('/:id', auth, async (req, res) => {
   try {
     const expense = await Expense.findById(req.params.id);
 
